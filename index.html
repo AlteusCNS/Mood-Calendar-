@@ -258,8 +258,6 @@ button:disabled {
 
     </form>
 
-    <div id="status" role="status" aria-live="polite"></div>
-
     <div class="foot">Alteus • Mood Calendar</div>
 
   </div>
@@ -340,10 +338,7 @@ window.addEventListener('message', function(event) {
 
   if (event.data.success) {
 
-    showStatus(
-      event.data.message || 'Registration saved successfully.',
-      'ok'
-    );
+  
 
     if (event.data.pdfBase64) {
       downloadPdf(
@@ -356,10 +351,6 @@ window.addEventListener('message', function(event) {
 
   } else {
 
-    showStatus(
-      event.data.message || 'Submission failed. Please try again.',
-      'err'
-    );
 
   }
 });
