@@ -6,7 +6,9 @@
 <title>Mood Calendar | Doctor Registration</title>
 
 <style>
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -135,31 +137,8 @@ button {
 }
 
 button:disabled {
-  opacity: .6;
+  opacity: .7;
   cursor: wait;
-}
-
-#status {
-  display: none;
-  margin: 18px 22px 22px;
-  padding: 13px 14px;
-  border-radius: 10px;
-  font-size: 14px;
-  line-height: 1.45;
-}
-
-#status.ok {
-  display: block;
-  background: #edf8f0;
-  color: #225d35;
-  border: 1px solid #cce8d3;
-}
-
-#status.err {
-  display: block;
-  background: #fff0f0;
-  color: #8a2525;
-  border: 1px solid #f0cccc;
 }
 
 .foot {
@@ -170,9 +149,17 @@ button:disabled {
 }
 
 @media(max-width:420px) {
-  body { padding: 12px 9px; }
-  form { padding: 21px 17px; }
-  h1 { font-size: 24px; }
+  body {
+    padding: 12px 9px;
+  }
+
+  form {
+    padding: 21px 17px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
 }
 </style>
 </head>
@@ -180,90 +167,102 @@ button:disabled {
 <body>
 
 <div class="wrap">
-  <div class="card">
+<div class="card">
 
-    <div class="header">
-      <div class="logo-box">
-        <img
-          src="https://i.ibb.co/vx8MDFtw/Cilapam.png"
-          alt="Alteus and Cilapam">
-      </div>
+  <div class="header">
 
-      <h1>Mood Calendar</h1>
-      <p class="subtitle">Doctor Registration</p>
+    <div class="logo-box">
+      <img
+        src="https://i.ibb.co/vx8MDFtw/Cilapam.png"
+        alt="Alteus and Cilapam">
     </div>
 
-    <form id="registrationForm">
-
-      <div class="field">
-        <label for="doctorName">Doctor's Name</label>
-        <input
-          id="doctorName"
-          name="doctorName"
-          type="text"
-          required
-          placeholder="Enter doctor's name">
-      </div>
-
-      <div class="field">
-        <label for="speciality">Speciality</label>
-
-        <select id="speciality" name="speciality" required>
-          <option value="">Select speciality</option>
-          <option>Psychiatrist</option>
-          <option>Consultant Physician</option>
-          <option>General Physician</option>
-          <option>Neurologist</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label for="practisingArea">Practising Area</label>
-        <input
-          id="practisingArea"
-          name="practisingArea"
-          type="text"
-          required
-          placeholder="Enter practising area">
-      </div>
-
-      <div class="field">
-        <span class="question">
-          Is any Alteus representative currently approaching you?
-        </span>
-
-        <div class="radio-row">
-          <label>
-            <input
-              type="radio"
-              name="representativeApproaching"
-              value="Yes"
-              required>
-            Yes
-          </label>
-
-          <label>
-            <input
-              type="radio"
-              name="representativeApproaching"
-              value="No">
-            No
-          </label>
-        </div>
-      </div>
-
-      <button id="submitBtn" type="submit">
-        Submit Registration
-      </button>
-
-    </form>
-
-    <div class="foot">Alteus • Mood Calendar</div>
+    <h1>Mood Calendar</h1>
+    <p class="subtitle">Doctor Registration</p>
 
   </div>
+
+  <form id="registrationForm">
+
+    <div class="field">
+      <label for="doctorName">Doctor's Name</label>
+
+      <input
+        id="doctorName"
+        name="doctorName"
+        type="text"
+        required
+        placeholder="Enter doctor's name">
+    </div>
+
+    <div class="field">
+      <label for="speciality">Speciality</label>
+
+      <select
+        id="speciality"
+        name="speciality"
+        required>
+
+        <option value="">Select speciality</option>
+        <option>Psychiatrist</option>
+        <option>Consultant Physician</option>
+        <option>General Physician</option>
+        <option>Neurologist</option>
+
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="practisingArea">Practising Area</label>
+
+      <input
+        id="practisingArea"
+        name="practisingArea"
+        type="text"
+        required
+        placeholder="Enter practising area">
+    </div>
+
+    <div class="field">
+
+      <span class="question">
+        Is any Alteus representative currently approaching you?
+      </span>
+
+      <div class="radio-row">
+
+        <label>
+          <input
+            type="radio"
+            name="representativeApproaching"
+            value="Yes"
+            required>
+          Yes
+        </label>
+
+        <label>
+          <input
+            type="radio"
+            name="representativeApproaching"
+            value="No">
+          No
+        </label>
+
+      </div>
+    </div>
+
+    <button id="submitBtn" type="submit">
+      Submit Registration
+    </button>
+
+  </form>
+
+  <div class="foot">Alteus • Mood Calendar</div>
+
+</div>
 </div>
 
-<!-- Hidden frame receives the Apps Script response -->
+<!-- Hidden submission frame -->
 <iframe
   name="submitFrame"
   id="submitFrame"
@@ -273,27 +272,24 @@ button:disabled {
 
 <script>
 
-// YOUR DEPLOYED GOOGLE APPS SCRIPT URL
+// GOOGLE APPS SCRIPT WEB APP URL
+
 const SCRIPT_URL =
 'https://script.google.com/macros/s/AKfycbxbKV7hBHs6VZzQjiFFQ5HEFyxSkBbAavkpX_ob0hbKgG-M5Y6G4R6fcy5IjWRvaGF3/exec';
 
 
 const form = document.getElementById('registrationForm');
 const button = document.getElementById('submitBtn');
-const statusBox = document.getElementById('status');
 const frame = document.getElementById('submitFrame');
 
 let waiting = false;
+let timeoutMessageShown = false;
 
 
-function showStatus(message, type) {
-  statusBox.textContent = message;
-  statusBox.className = type;
-  statusBox.style.display = 'block';
-}
-
+// PDF DOWNLOAD FUNCTION
 
 function downloadPdf(base64, fileName) {
+
   const binary = atob(base64);
   const bytes = new Uint8Array(binary.length);
 
@@ -308,6 +304,7 @@ function downloadPdf(base64, fileName) {
   const url = URL.createObjectURL(blob);
 
   const a = document.createElement('a');
+
   a.href = url;
   a.download = fileName || 'Mood_Calendar_Registration.pdf';
 
@@ -321,9 +318,8 @@ function downloadPdf(base64, fileName) {
 }
 
 
-// Receive Apps Script response.
-// Do not compare event.source here because the
-// Apps Script response may be served through a redirected frame.
+// RECEIVE RESPONSE FROM APPS SCRIPT
+
 window.addEventListener('message', function(event) {
 
   if (!event.data ||
@@ -334,11 +330,10 @@ window.addEventListener('message', function(event) {
   waiting = false;
 
   button.disabled = false;
-  button.textContent = 'Submit Registration';
 
   if (event.data.success) {
 
-  
+    button.textContent = 'Registration Submitted ✓';
 
     if (event.data.pdfBase64) {
       downloadPdf(
@@ -347,16 +342,35 @@ window.addEventListener('message', function(event) {
       );
     }
 
+    if (event.data.pdfBase64) {
+      alert('Registration saved successfully. Your PDF is being downloaded.');
+    } else {
+      alert(event.data.message ||
+        'Registration saved successfully, but PDF generation failed.');
+    }
+
     form.reset();
+
+    setTimeout(function() {
+      button.textContent = 'Submit Registration';
+    }, 3000);
 
   } else {
 
+    button.textContent = 'Submit Registration';
+
+    alert(
+      event.data.message ||
+      'Registration failed. Please try again.'
+    );
 
   }
+
 });
 
 
-// Submit form to Apps Script through hidden iframe.
+// SUBMIT FORM
+
 form.addEventListener('submit', function(event) {
 
   event.preventDefault();
@@ -364,14 +378,10 @@ form.addEventListener('submit', function(event) {
   if (waiting) return;
 
   waiting = true;
+  timeoutMessageShown = false;
 
   button.disabled = true;
   button.textContent = 'Submitting...';
-
-  showStatus(
-    'Submitting your registration. Please wait; do not submit again.',
-    'ok'
-  );
 
   const payload = new FormData(form);
 
@@ -391,6 +401,7 @@ form.addEventListener('submit', function(event) {
     input.value = value;
 
     postForm.appendChild(input);
+
   }
 
   document.body.appendChild(postForm);
@@ -399,14 +410,19 @@ form.addEventListener('submit', function(event) {
 
   postForm.remove();
 
-  // Warning only. Does not cancel server processing.
+
+  // DELAY WARNING: DOES NOT CANCEL THE SUBMISSION
+
   setTimeout(function() {
 
-    if (waiting) {
+    if (waiting && !timeoutMessageShown) {
 
-      showStatus(
-        'The server is taking longer than expected. Please check the spreadsheet and Apps Script Executions before trying again.',
-        'ok'
+      timeoutMessageShown = true;
+
+      button.textContent = 'Still Processing...';
+
+      alert(
+        'The server is taking longer than expected. Please check your Google Spreadsheet before submitting again.'
       );
 
     }
