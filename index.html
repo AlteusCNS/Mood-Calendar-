@@ -17,7 +17,10 @@ body {
   color: #382432;
 }
 
-.wrap { max-width: 540px; margin: 0 auto; }
+.wrap {
+  max-width: 540px;
+  margin: 0 auto;
+}
 
 .card {
   background: #fff;
@@ -65,9 +68,13 @@ h1 {
   color: #75445e;
 }
 
-form { padding: 24px 22px 26px; }
+form {
+  padding: 24px 22px 26px;
+}
 
-.field { margin-bottom: 20px; }
+.field {
+  margin-bottom: 20px;
+}
 
 label, .question {
   display: block;
@@ -173,86 +180,105 @@ button:disabled {
 <body>
 
 <div class="wrap">
-<div class="card">
+  <div class="card">
 
-  <div class="header">
-    <div class="logo-box">
-      <img src="https://i.ibb.co/vx8MDFtw/Cilapam.png"
-           alt="Alteus and Cilapam">
-    </div>
-    <h1>Mood Calendar</h1>
-    <p class="subtitle">Doctor Registration</p>
-  </div>
-
-  <form id="registrationForm">
-
-    <div class="field">
-      <label for="doctorName">Doctor's Name</label>
-      <input id="doctorName" name="doctorName"
-             type="text" required
-             placeholder="Enter doctor's name">
-    </div>
-
-    <div class="field">
-      <label for="speciality">Speciality</label>
-      <select id="speciality" name="speciality" required>
-        <option value="">Select speciality</option>
-        <option>Psychiatrist</option>
-        <option>Consultant Physician</option>
-        <option>General Physician</option>
-        <option>Neurologist</option>
-      </select>
-    </div>
-
-    <div class="field">
-      <label for="practisingArea">Practising Area</label>
-      <input id="practisingArea" name="practisingArea"
-             type="text" required
-             placeholder="Enter practising area">
-    </div>
-
-    <div class="field">
-      <span class="question">
-        Is any Alteus representative currently approaching you?
-      </span>
-
-      <div class="radio-row">
-        <label>
-          <input type="radio"
-                 name="representativeApproaching"
-                 value="Yes" required> Yes
-        </label>
-
-        <label>
-          <input type="radio"
-                 name="representativeApproaching"
-                 value="No"> No
-        </label>
+    <div class="header">
+      <div class="logo-box">
+        <img
+          src="https://i.ibb.co/vx8MDFtw/Cilapam.png"
+          alt="Alteus and Cilapam">
       </div>
+
+      <h1>Mood Calendar</h1>
+      <p class="subtitle">Doctor Registration</p>
     </div>
 
-    <button id="submitBtn" type="submit">
-      Submit Registration
-    </button>
+    <form id="registrationForm">
 
-  </form>
+      <div class="field">
+        <label for="doctorName">Doctor's Name</label>
+        <input
+          id="doctorName"
+          name="doctorName"
+          type="text"
+          required
+          placeholder="Enter doctor's name">
+      </div>
 
-  <div id="status" role="status" aria-live="polite"></div>
-  <div class="foot">Alteus • Mood Calendar</div>
+      <div class="field">
+        <label for="speciality">Speciality</label>
 
+        <select id="speciality" name="speciality" required>
+          <option value="">Select speciality</option>
+          <option>Psychiatrist</option>
+          <option>Consultant Physician</option>
+          <option>General Physician</option>
+          <option>Neurologist</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="practisingArea">Practising Area</label>
+        <input
+          id="practisingArea"
+          name="practisingArea"
+          type="text"
+          required
+          placeholder="Enter practising area">
+      </div>
+
+      <div class="field">
+        <span class="question">
+          Is any Alteus representative currently approaching you?
+        </span>
+
+        <div class="radio-row">
+          <label>
+            <input
+              type="radio"
+              name="representativeApproaching"
+              value="Yes"
+              required>
+            Yes
+          </label>
+
+          <label>
+            <input
+              type="radio"
+              name="representativeApproaching"
+              value="No">
+            No
+          </label>
+        </div>
+      </div>
+
+      <button id="submitBtn" type="submit">
+        Submit Registration
+      </button>
+
+    </form>
+
+    <div id="status" role="status" aria-live="polite"></div>
+
+    <div class="foot">Alteus • Mood Calendar</div>
+
+  </div>
 </div>
-</div>
 
-<iframe name="submitFrame"
-        id="submitFrame"
-        title="Submission frame"
-        style="display:none"></iframe>
+<!-- Hidden frame receives the Apps Script response -->
+<iframe
+  name="submitFrame"
+  id="submitFrame"
+  title="Submission frame"
+  style="display:none">
+</iframe>
 
 <script>
 
-// YOUR APPS SCRIPT URL
+// YOUR DEPLOYED GOOGLE APPS SCRIPT URL
 const SCRIPT_URL =
 'https://script.google.com/macros/s/AKfycbxbKV7hBHs6VZzQjiFFQ5HEFyxSkBbAavkpX_ob0hbKgG-M5Y6G4R6fcy5IjWRvaGF3/exec';
+
 
 const form = document.getElementById('registrationForm');
 const button = document.getElementById('submitBtn');
@@ -261,11 +287,13 @@ const frame = document.getElementById('submitFrame');
 
 let waiting = false;
 
+
 function showStatus(message, type) {
   statusBox.textContent = message;
   statusBox.className = type;
   statusBox.style.display = 'block';
 }
+
 
 function downloadPdf(base64, fileName) {
   const binary = atob(base64);
@@ -275,7 +303,10 @@ function downloadPdf(base64, fileName) {
     bytes[i] = binary.charCodeAt(i);
   }
 
-  const blob = new Blob([bytes], {type:'application/pdf'});
+  const blob = new Blob([bytes], {
+    type: 'application/pdf'
+  });
+
   const url = URL.createObjectURL(blob);
 
   const a = document.createElement('a');
@@ -286,19 +317,24 @@ function downloadPdf(base64, fileName) {
   a.click();
   a.remove();
 
-  setTimeout(() => URL.revokeObjectURL(url), 1500);
+  setTimeout(function() {
+    URL.revokeObjectURL(url);
+  }, 5000);
 }
 
-// Receive the response from Apps Script
+
+// Receive Apps Script response.
+// Do not compare event.source here because the
+// Apps Script response may be served through a redirected frame.
 window.addEventListener('message', function(event) {
 
-  if (event.source !== frame.contentWindow ||
-      !event.data ||
+  if (!event.data ||
       event.data.type !== 'MOOD_CALENDAR_RESULT') {
     return;
   }
 
   waiting = false;
+
   button.disabled = false;
   button.textContent = 'Submit Registration';
 
@@ -310,7 +346,10 @@ window.addEventListener('message', function(event) {
     );
 
     if (event.data.pdfBase64) {
-      downloadPdf(event.data.pdfBase64, event.data.fileName);
+      downloadPdf(
+        event.data.pdfBase64,
+        event.data.fileName
+      );
     }
 
     form.reset();
@@ -325,7 +364,8 @@ window.addEventListener('message', function(event) {
   }
 });
 
-// Submit registration
+
+// Submit form to Apps Script through hidden iframe.
 form.addEventListener('submit', function(event) {
 
   event.preventDefault();
@@ -333,6 +373,7 @@ form.addEventListener('submit', function(event) {
   if (waiting) return;
 
   waiting = true;
+
   button.disabled = true;
   button.textContent = 'Submitting...';
 
@@ -344,30 +385,41 @@ form.addEventListener('submit', function(event) {
   const payload = new FormData(form);
 
   const postForm = document.createElement('form');
+
   postForm.method = 'POST';
   postForm.action = SCRIPT_URL;
   postForm.target = 'submitFrame';
   postForm.style.display = 'none';
 
   for (const [key, value] of payload.entries()) {
+
     const input = document.createElement('input');
+
     input.type = 'hidden';
     input.name = key;
     input.value = value;
+
     postForm.appendChild(input);
   }
 
   document.body.appendChild(postForm);
+
   postForm.submit();
+
   postForm.remove();
 
+  // Warning only. Does not cancel server processing.
   setTimeout(function() {
+
     if (waiting) {
+
       showStatus(
-        'The server is taking longer than expected. Check Apps Script Executions before submitting again.',
+        'The server is taking longer than expected. Please check the spreadsheet and Apps Script Executions before trying again.',
         'ok'
       );
+
     }
+
   }, 25000);
 
 });
