@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mood Calendar | Doctor Registration</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 22px 14px;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(145deg, #fff7fb, #f8e5ef);
+  color: #382432;
+}
+
+.wrap { max-width: 540px; margin: 0 auto; }
+
+.card {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 12px 34px rgba(91,35,67,.12);
+  border: 1px solid #f1d7e4;
+}
+
+.header {
+  text-align: center;
+  padding: 25px 20px 22px;
+  background: linear-gradient(135deg,#f8e0ec,#f3c9dc);
+  border-bottom: 4px solid #d66b9c;
+}
+
+.logo-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  padding: 10px 16px;
+  border-radius: 12px;
+  min-height: 66px;
+  max-width: 90%;
+  margin-bottom: 15px;
+}
+
+.logo-box img {
+  display: block;
+  max-width: 230px;
+  max-height: 66px;
+  object-fit: contain;
+}
+
+h1 {
+  margin: 0;
+  font-size: 27px;
+  color: #642b4b;
+}
+
+.subtitle {
+  margin: 7px 0 0;
+  font-size: 13px;
+  color: #75445e;
+}
+
+form { padding: 24px 22px 26px; }
+
+.field { margin-bottom: 20px; }
+
+label, .question {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #51283f;
+}
+
+input[type="text"], select {
+  width: 100%;
+  border: 1px solid #dfc4d2;
+  border-radius: 10px;
+  padding: 13px 12px;
+  font-size: 15px;
+  color: #382432;
+  background: #fff;
+  outline: none;
+}
+
+input:focus, select:focus {
+  border-color: #c65c8d;
+  box-shadow: 0 0 0 3px rgba(198,92,141,.12);
+}
+
+.radio-row {
+  display: flex;
+  gap: 24px;
+  padding: 7px 0 2px;
+}
+
+.radio-row label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  margin: 0;
+  font-size: 15px;
+}
+
+input[type="radio"] {
+  accent-color: #b9477d;
+  width: 18px;
+  height: 18px;
+}
+
+button {
+  width: 100%;
+  border: 0;
+  border-radius: 11px;
+  padding: 15px;
+  background: linear-gradient(135deg,#bd4e83,#8e315f);
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 5px 14px rgba(142,49,95,.2);
+}
+
+button:disabled {
+  opacity: .6;
+  cursor: wait;
+}
+
+#status {
+  display: none;
+  margin: 18px 22px 22px;
+  padding: 13px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+#status.ok {
+  display: block;
+  background: #edf8f0;
+  color: #225d35;
+  border: 1px solid #cce8d3;
+}
+
+#status.err {
+  display: block;
+  background: #fff0f0;
+  color: #8a2525;
+  border: 1px solid #f0cccc;
+}
+
+.foot {
+  text-align: center;
+  color: #916c80;
+  font-size: 11px;
+  padding: 0 10px 18px;
+}
+
+@media(max-width:420px) {
+  body { padding: 12px 9px; }
+  form { padding: 21px 17px; }
+  h1 { font-size: 24px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+<div class="card">
+
+  <div class="header">
+    <div class="logo-box">
+      <img src="https://i.ibb.co/vx8MDFtw/Cilapam.png"
+           alt="Alteus and Cilapam">
+    </div>
+    <h1>Mood Calendar</h1>
+    <p class="subtitle">Doctor Registration</p>
+  </div>
+
+  <form id="registrationForm">
+
+    <div class="field">
+      <label for="doctorName">Doctor's Name</label>
+      <input id="doctorName" name="doctorName"
+             type="text" required
+             placeholder="Enter doctor's name">
+    </div>
+
+    <div class="field">
+      <label for="speciality">Speciality</label>
+      <select id="speciality" name="speciality" required>
+        <option value="">Select speciality</option>
+        <option>Psychiatrist</option>
+        <option>Consultant Physician</option>
+        <option>General Physician</option>
+        <option>Neurologist</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="practisingArea">Practising Area</label>
+      <input id="practisingArea" name="practisingArea"
+             type="text" required
+             placeholder="Enter practising area">
+    </div>
+
+    <div class="field">
+      <span class="question">
+        Is any Alteus representative currently approaching you?
+      </span>
+
+      <div class="radio-row">
+        <label>
+          <input type="radio"
+                 name="representativeApproaching"
+                 value="Yes" required> Yes
+        </label>
+
+        <label>
+          <input type="radio"
+                 name="representativeApproaching"
+                 value="No"> No
+        </label>
+      </div>
+    </div>
+
+    <button id="submitBtn" type="submit">
+      Submit Registration
+    </button>
+
+  </form>
+
+  <div id="status" role="status" aria-live="polite"></div>
+  <div class="foot">Alteus • Mood Calendar</div>
+
+</div>
+</div>
+
+<iframe name="submitFrame"
+        id="submitFrame"
+        title="Submission frame"
+        style="display:none"></iframe>
+
+<script>
+
+// YOUR APPS SCRIPT URL
+const SCRIPT_URL =
+'https://script.google.com/macros/s/AKfycbxbKV7hBHs6VZzQjiFFQ5HEFyxSkBbAavkpX_ob0hbKgG-M5Y6G4R6fcy5IjWRvaGF3/exec';
+
+const form = document.getElementById('registrationForm');
+const button = document.getElementById('submitBtn');
+const statusBox = document.getElementById('status');
+const frame = document.getElementById('submitFrame');
+
+let waiting = false;
+
+function showStatus(message, type) {
+  statusBox.textContent = message;
+  statusBox.className = type;
+  statusBox.style.display = 'block';
+}
+
+function downloadPdf(base64, fileName) {
+  const binary = atob(base64);
+  const bytes = new Uint8Array(binary.length);
+
+  for (let i = 0; i < binary.length; i++) {
+    bytes[i] = binary.charCodeAt(i);
+  }
+
+  const blob = new Blob([bytes], {type:'application/pdf'});
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = fileName || 'Mood_Calendar_Registration.pdf';
+
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  setTimeout(() => URL.revokeObjectURL(url), 1500);
+}
+
+// Receive the response from Apps Script
+window.addEventListener('message', function(event) {
+
+  if (event.source !== frame.contentWindow ||
+      !event.data ||
+      event.data.type !== 'MOOD_CALENDAR_RESULT') {
+    return;
+  }
+
+  waiting = false;
+  button.disabled = false;
+  button.textContent = 'Submit Registration';
+
+  if (event.data.success) {
+
+    showStatus(
+      event.data.message || 'Registration saved successfully.',
+      'ok'
+    );
+
+    if (event.data.pdfBase64) {
+      downloadPdf(event.data.pdfBase64, event.data.fileName);
+    }
+
+    form.reset();
+
+  } else {
+
+    showStatus(
+      event.data.message || 'Submission failed. Please try again.',
+      'err'
+    );
+
+  }
+});
+
+// Submit registration
+form.addEventListener('submit', function(event) {
+
+  event.preventDefault();
+
+  if (waiting) return;
+
+  waiting = true;
+  button.disabled = true;
+  button.textContent = 'Submitting...';
+
+  showStatus(
+    'Submitting your registration. Please wait; do not submit again.',
+    'ok'
+  );
+
+  const payload = new FormData(form);
+
+  const postForm = document.createElement('form');
+  postForm.method = 'POST';
+  postForm.action = SCRIPT_URL;
+  postForm.target = 'submitFrame';
+  postForm.style.display = 'none';
+
+  for (const [key, value] of payload.entries()) {
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = key;
+    input.value = value;
+    postForm.appendChild(input);
+  }
+
+  document.body.appendChild(postForm);
+  postForm.submit();
+  postForm.remove();
+
+  setTimeout(function() {
+    if (waiting) {
+      showStatus(
+        'The server is taking longer than expected. Check Apps Script Executions before submitting again.',
+        'ok'
+      );
+    }
+  }, 25000);
+
+});
+
+</script>
+
+</body>
+</html>
